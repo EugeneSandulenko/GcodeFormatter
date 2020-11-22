@@ -3,21 +3,23 @@
 
 import sys, os
 
-sourceFileName = sys.argv[1];
+source_file_name = sys.argv[1]
 
-splitName=os.path.splitext(sourceFileName)
-newFileName = splitName[0] + '_m' + splitName[1];
+splitName = os.path.splitext(source_file_name)
+newFileName = splitName[0] + '_m' + splitName[1]
 
-print 'Source file name: ', sourceFileName
-print 'New file name: ', newFileName
+print('Source file name: ', source_file_name)
+print('New file name: ', newFileName)
 
-sourceFile = open(sourceFileName, 'r')
+sourceFile = open(source_file_name, 'r')
 sourceContent = sourceFile.readlines()
 sourceFile.close()
 
-print 'Source file has  ', len(sourceContent), ' lines'
+print('Source file has  ', len(sourceContent), ' lines')
 
-# writing to file
-newFile = open(newFileName, 'w')
-newFile.writelines(sourceContent)
-newFile.close()
+# writ new file
+with open(newFileName, 'w') as f:
+    for line in sourceContent:
+        f.write(line)
+        if line.startswith(';LAYER:'):
+            f.write('M117 %s' % line[1:])
