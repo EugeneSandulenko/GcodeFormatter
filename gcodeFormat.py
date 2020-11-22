@@ -17,9 +17,16 @@ sourceFile.close()
 
 print('Source file has  ', len(sourceContent), ' lines')
 
+layer_count = -1
 # writ new file
 with open(newFileName, 'w') as f:
     for line in sourceContent:
         f.write(line)
+        if layer_count < 0 and line.startswith(';Layer count:'):
+            layer_count = int(line[14:-1])
+            print('layers count: ', layer_count)
         if line.startswith(';LAYER:'):
-            f.write('M117 %s' % line[1:])
+            if layer_count > 0:
+                f.write('M117 {0} of {1}\n'.format(line[1:-1], layer_count))
+            else:
+                f.write('M117 {0}'.format(line[1:]))

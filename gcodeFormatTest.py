@@ -58,3 +58,34 @@ class TestGcodeFormater(unittest.TestCase):
             new_file_content = new_file.readlines()
 
         self.assertEqual(new_file_content, expected_content)
+
+    def test_gcodeFormater_adds_message_for_each_layer_with_total_layers_number(self):
+        file_content = [
+            "File with gcode\n",
+            ";Layer count: 356\n",
+            ";LAYER:0\n",
+            ";LAYER:1\n",
+            ";LAYER:238\n",
+            "some code\n",
+            "Third line"]
+
+        expected_content = [
+            "File with gcode\n",
+            ";Layer count: 356\n",
+            ";LAYER:0\n",
+            "M117 LAYER:0 of 356\n",
+            ";LAYER:1\n",
+            "M117 LAYER:1 of 356\n",
+            ";LAYER:238\n",
+            "M117 LAYER:238 of 356\n",
+            "some code\n",
+            "Third line"]
+
+        self.create_test_file(file_content)
+
+        self.run_gcode_formater()
+
+        with open(self.new_file_name, 'r') as new_file:
+            new_file_content = new_file.readlines()
+
+        self.assertEqual(new_file_content, expected_content)
