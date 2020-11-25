@@ -42,11 +42,11 @@ class TestGcodeFormatter(unittest.TestCase):
         expected_content = [
             "File with gcode\n",
             ";LAYER:0\n",
-            "M117 3-LAYER-0\n",
+            "M117 3-0\n",
             ";LAYER:1\n",
-            "M117 5-LAYER-1\n",
+            "M117 5-1\n",
             ";LAYER:238\n",
-            "M117 7-LAYER-238\n",
+            "M117 7-238\n",
             "some code\n",
             "Third line"]
 
@@ -73,11 +73,11 @@ class TestGcodeFormatter(unittest.TestCase):
             "File with gcode\n",
             ";Layer count: 356\n",
             ";LAYER:0\n",
-            "M117 4-LAYER-0 of 356\n",
+            "M117 4-0 of 356\n",
             ";LAYER:1\n",
-            "M117 6-LAYER-1 of 356\n",
+            "M117 6-1 of 356\n",
             ";LAYER:238\n",
-            "M117 8-LAYER-238 of 356\n",
+            "M117 8-238 of 356\n",
             "some code\n",
             "Third line"]
 
@@ -106,15 +106,15 @@ class TestGcodeFormatter(unittest.TestCase):
             "File with gcode\n",
             ";Layer count: 356\n",
             ";LAYER:0\n",
-            "M117 4-LAYER-0 of 356\n",
+            "M117 4-0 of 356\n",
             ";TYPE:SKIN\n",
-            "M117 6-LAYER-0 of 356 SKIN\n",
+            "M117 6-0 of 356 SKIN\n",
             ";TYPE:INNER\n",
-            "M117 8-LAYER-0 of 356 INNER\n",
+            "M117 8-0 of 356 INNER\n",
             ";LAYER:1\n",
-            "M117 10-LAYER-1 of 356\n",
+            "M117 10-1 of 356\n",
             ";LAYER:238\n",
-            "M117 12-LAYER-238 of 356\n",
+            "M117 12-238 of 356\n",
             "some code\n",
             "Third line"]
 

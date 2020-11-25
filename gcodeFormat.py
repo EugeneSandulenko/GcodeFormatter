@@ -7,7 +7,7 @@ def generate_message():
         message = '{0} of {1}'.format(message, layer_count)
     if current_type != '':
         message = '{0} {1}'.format(message, current_type)
-    return message.replace(':','-') + '\n'
+    return message + '\n'
 
 
 source_file_name = sys.argv[1]
@@ -35,7 +35,7 @@ with open(newFileName, 'w') as f:
             layer_count = int(line[14:-1])
             print('layers count: {0}'.format(layer_count))
         if line.startswith(';LAYER:'):
-            current_layer = line[1:-1]
+            current_layer = line[7:-1]
             current_type = ''
             f.write(generate_message())
             current_line = current_line + 1
@@ -44,4 +44,3 @@ with open(newFileName, 'w') as f:
             f.write(generate_message())
             current_line = current_line + 1
 print('New file has {0} lines'.format(current_line))
-
